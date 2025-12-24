@@ -1,22 +1,12 @@
 import pandas as pd
-import re
 
-csv_path = "/Users/oliver.payne/Desktop/Queries.csv"
+csv_path = "/Users/oliver.payne/Desktop/keywords.csv"
 df = pd.read_csv(csv_path)
 
-def preprocess_data():
-  def non_branded_rows():
-    return df[~df["Top queries"].str.contains("colonial")]
+grouped = (
+    df.groupby("Keyword")["URL"].agg(lambda x: ", ".join(sorted(set(x)))).reset_index()
+)
 
-  def rows_with_clicks():
-    return non_branded_rows()[df["Clicks"] > 0]
+grouped["url_count"] = grouped["URL"].apply(lambda x: len(x.split(", ")))
 
-  return rows_with_clicks()
-
-df = preprocess_data()
-print (df)
-
-# Identify cannibalization
-# Create a list of cannibalization candidates
-# Calculate clicks per query / click share etc.
-# Print results
+grouped.to_csv("output.csv")
