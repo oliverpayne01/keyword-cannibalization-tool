@@ -1,4 +1,11 @@
-# Keyword Cannibalization Checker
-Automated keyword cannibalization analysis to expedite a boring yet important part of maintaing a marketing website.
+# Keyword Cannibalization Tool
 
-Built with Python.
+Automated keyword cannibalization analysis to expedite a simple yet time consuming and important part of optimizing a website.
+
+Dependencies:
+pandas==2.3.3
+├── numpy
+├── python-dateutil
+│ └── six
+├── pytz
+└── tzdata
